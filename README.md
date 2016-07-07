@@ -1,5 +1,11 @@
-# Advanced-Joystick-Mapping
-use a JoyStick to simulate your mouse and keyboard.
+# AJM - Advanced Joystick Mapping
+AJM uses a JoyStick to simulate your mouse and keyboard.
 
-* easily mapping several actions(both mouse actions and keyboard actions) to one JoyStick button or axe.
-* use macro like syntax
+- Easily mapping several actions(both mouse actions and keyboard actions) to any JoyStick buttons or axes.
+- Use macro like syntax.
+
+AJM Requires Java 8 and supports windows 8 or later.
+
+Library:
+- LWJGL 3
+
