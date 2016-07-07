@@ -8,9 +8,12 @@ import com.notech.game.simulate.Button;
 import com.notech.game.simulate.Device;
 
 public class JoyStickButton extends EventDispatcher {
+	
+	private static final int BUTTON_STATE_PRESSED = 1;
+	private static final int BUTTON_STATE_RELEASED = 0;
 
 	private int buttonId;
-	private int state = JoyStick.BUTTON_RELEASED;
+	private int state = BUTTON_STATE_RELEASED;
 	
 	protected JoyStickButton(int buttonId) {
 		this.buttonId = buttonId;
@@ -18,13 +21,13 @@ public class JoyStickButton extends EventDispatcher {
 	
 	public void update(int value) {
 		if (value == 1) {
-			if (state == JoyStick.BUTTON_RELEASED) {
-				state = JoyStick.BUTTON_PRESSED;
+			if (state == BUTTON_STATE_RELEASED) {
+				state = BUTTON_STATE_PRESSED;
 				processEvent(new JoyStickEvent(JoyStickEvent.BUTTON_PRESSED, buttonId));
 			}
 		} else {
-			if (state == JoyStick.BUTTON_PRESSED) {
-				state = JoyStick.BUTTON_RELEASED;
+			if (state == BUTTON_STATE_PRESSED) {
+				state = BUTTON_STATE_RELEASED;
 				
 				processEvent(new JoyStickEvent(JoyStickEvent.BUTTON_CLICKED, buttonId));
 				processEvent(new JoyStickEvent(JoyStickEvent.BUTTON_RELEASED, buttonId));

@@ -18,17 +18,17 @@ public class JoyStickAdapter implements JoyStickListener {
 	}
 
 	@Override
-	public void axeStarted(JoyStickEvent e) {
+	public void axisStarted(JoyStickEvent e) {
 		
 	}
 
 	@Override
-	public void axeStoped(JoyStickEvent e) {
+	public void axisStoped(JoyStickEvent e) {
 		
 	}
 
 	@Override
-	public void axeMoving(JoyStickEvent e) {
+	public void axisMoving(JoyStickEvent e) {
 		
 	}
 

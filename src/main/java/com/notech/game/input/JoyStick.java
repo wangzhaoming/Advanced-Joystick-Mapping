@@ -12,17 +12,12 @@ import com.notech.game.event.JoyStickEvent;
 
 public class JoyStick {
 	
-	public static final int BUTTON_PRESSED = 1;
-	public static final int BUTTON_RELEASED = 0;
-	public static final int AXE_STARTED = 1;
-	public static final int AXE_STOPPED = 0;
-	
 	public static final int INTERVAL = 10;
 
-	private JoyStickAxe leftAxe = new JoyStickAxe(JoyStickEvent.LEFT_AXE);
-	private JoyStickAxe rightAxe = new JoyStickAxe(JoyStickEvent.RIGHT_AXE);
-	private JoyStickAxe leftTrigger = new JoyStickAxe(JoyStickEvent.LEFT_TRIGGER);
-	private JoyStickAxe rightTrigger = new JoyStickAxe(JoyStickEvent.RIGHT_TRIGGER);
+	private JoyStickAxis leftAxis = new JoyStickAxis(JoyStickEvent.LEFT_AXIS);
+	private JoyStickAxis rightAxis = new JoyStickAxis(JoyStickEvent.RIGHT_AXIS);
+	private JoyStickAxis leftTrigger = new JoyStickAxis(JoyStickEvent.LEFT_TRIGGER);
+	private JoyStickAxis rightTrigger = new JoyStickAxis(JoyStickEvent.RIGHT_TRIGGER);
 	
 	private JoyStickButton btnA = new JoyStickButton(JoyStickEvent.BUTTON_A);
 	private JoyStickButton btnB = new JoyStickButton(JoyStickEvent.BUTTON_B);
@@ -49,8 +44,8 @@ public class JoyStick {
 	public void poll() throws InterruptedException {
 		while (true) {
 			FloatBuffer buffer1 = glfwGetJoystickAxes(GLFW_JOYSTICK_1);
-			leftAxe.update(buffer1.get(JoyStickEvent.LEFT_AXE_H), buffer1.get(JoyStickEvent.LEFT_AXE_V));
-			rightAxe.update(buffer1.get(JoyStickEvent.RIGHT_AXE_H), buffer1.get(JoyStickEvent.RIGHT_AXE_V));
+			leftAxis.update(buffer1.get(JoyStickEvent.LEFT_AXIS_H), buffer1.get(JoyStickEvent.LEFT_AXIS_V));
+			rightAxis.update(buffer1.get(JoyStickEvent.RIGHT_AXIS_H), buffer1.get(JoyStickEvent.RIGHT_AXIS_V));
 			leftTrigger.update((buffer1.get(JoyStickEvent.LEFT_TRIGGER) + 1) / 2, 0);
 			rightTrigger.update((buffer1.get(JoyStickEvent.RIGHT_TRIGGER) + 1) / 2, 0);
 			
@@ -74,22 +69,22 @@ public class JoyStick {
 		}
 	}
 
-	public JoyStickAxe getLeftAxe() {
-		return leftAxe;
+	public JoyStickAxis getLeftAxis() {
+		return leftAxis;
 	}
 
 
-	public JoyStickAxe getRightAxe() {
-		return rightAxe;
+	public JoyStickAxis getRightAxis() {
+		return rightAxis;
 	}
 
 
-	public JoyStickAxe getLeftTrigger() {
+	public JoyStickAxis getLeftTrigger() {
 		return leftTrigger;
 	}
 
 
-	public JoyStickAxe getRightTrigger() {
+	public JoyStickAxis getRightTrigger() {
 		return rightTrigger;
 	}
 

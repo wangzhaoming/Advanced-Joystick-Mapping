@@ -5,7 +5,7 @@ public interface JoyStickListener {
 	void buttonReleased(JoyStickEvent e);
 	void buttonClicked(JoyStickEvent e);
 	
-	void axeStarted(JoyStickEvent e);
-	void axeStoped(JoyStickEvent e);
-	void axeMoving(JoyStickEvent e);
+	void axisStarted(JoyStickEvent e);
+	void axisStoped(JoyStickEvent e);
+	void axisMoving(JoyStickEvent e);
 }

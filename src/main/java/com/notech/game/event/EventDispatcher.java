@@ -26,14 +26,14 @@ public abstract class EventDispatcher {
 			case JoyStickEvent.BUTTON_RELEASED:
 				joyStickListener.buttonReleased(e);
 				break;
-			case JoyStickEvent.AXE_STARTED:
-				joyStickListener.axeStarted(e);
+			case JoyStickEvent.AXIS_STARTED:
+				joyStickListener.axisStarted(e);
 				break;
-			case JoyStickEvent.AXE_STOPPED:
-				joyStickListener.axeStoped(e);
+			case JoyStickEvent.AXIS_STOPPED:
+				joyStickListener.axisStoped(e);
 				break;
-			case JoyStickEvent.AXE_MOVING:
-				joyStickListener.axeMoving(e);
+			case JoyStickEvent.AXIS_MOVING:
+				joyStickListener.axisMoving(e);
 				break;
 			}
 		}

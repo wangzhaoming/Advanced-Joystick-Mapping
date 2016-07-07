@@ -42,17 +42,17 @@ public class Controller {
 	}
 
 	private void addListeners() {
-		joyStick.getLeftAxe().bind(KeyEvent.VK_W);
+		joyStick.getLeftAxis().bind(KeyEvent.VK_W);
 
-		joyStick.getLeftAxe().addJoyStickEventListener(new JoyStickAdapter() {
+		joyStick.getLeftAxis().addJoyStickEventListener(new JoyStickAdapter() {
 			@Override
-			public void axeMoving(JoyStickEvent e) {
+			public void axisMoving(JoyStickEvent e) {
 				Instructions moveCursor = new Instructions();
 
-				int dx = (int) (e.getAxeValueX() * OFFSET);
-				int dy = (int) (-e.getAxeValueY() * OFFSET);
+				int dx = (int) (e.getAxisValueX() * OFFSET);
+				int dy = (int) (-e.getAxisValueY() * OFFSET);
 
-				moveCursor.add(Device.create(Device.CURSOR), Cursor.CURSOR_MOVE_RELATIVE_TO_POINT, e.getSourceAxe(), dx, dy,
+				moveCursor.add(Device.create(Device.CURSOR), Cursor.CURSOR_MOVE_RELATIVE_TO_POINT, e.getSourceAxis(), dx, dy,
 						SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + CORRECTION_H).execute();
 			}
 		});
@@ -67,43 +67,43 @@ public class Controller {
 		Instructions releaseMouseLeft = new Instructions();
 		releaseMouseLeft.add(Device.create(InputEvent.BUTTON1_DOWN_MASK), Button.BUTTON_RELEASE);
 
-		joyStick.getRightAxe().addJoyStickEventListener(new JoyStickAdapter() {
+		joyStick.getRightAxis().addJoyStickEventListener(new JoyStickAdapter() {
 			@Override
-			public void axeMoving(JoyStickEvent e) {
+			public void axisMoving(JoyStickEvent e) {
 				if (mode == MODE_FREE_CURSOR) {
 					Instructions moveCursor = new Instructions();
 
-					int dx = (int) (e.getAxeValueX() * CURSOR_SPEED);
-					int dy = (int) (-e.getAxeValueY() * CURSOR_SPEED);
+					int dx = (int) (e.getAxisValueX() * CURSOR_SPEED);
+					int dy = (int) (-e.getAxisValueY() * CURSOR_SPEED);
 
-					moveCursor.add(Device.create(Device.CURSOR), Cursor.CURSOR_MOVE, e.getSourceAxe(), dx, dy).execute();
+					moveCursor.add(Device.create(Device.CURSOR), Cursor.CURSOR_MOVE, e.getSourceAxis(), dx, dy).execute();
 				} else {
 					Instructions moveCursor = new Instructions();
 
-					int dx = (int) (e.getAxeValueX() * OFFSET);
-					int dy = (int) (-e.getAxeValueY() * OFFSET);
+					int dx = (int) (e.getAxisValueX() * OFFSET);
+					int dy = (int) (-e.getAxisValueY() * OFFSET);
 
-					moveCursor.add(Device.create(Device.CURSOR), Cursor.CURSOR_MOVE_RELATIVE_TO_POINT, e.getSourceAxe(), dx, dy,
+					moveCursor.add(Device.create(Device.CURSOR), Cursor.CURSOR_MOVE_RELATIVE_TO_POINT, e.getSourceAxis(), dx, dy,
 							SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + CORRECTION_H_ATTACK).execute();
 				}
 			}
 
 			@Override
-			public void axeStarted(JoyStickEvent e) {
+			public void axisStarted(JoyStickEvent e) {
 				Instructions occupyCursor = new Instructions();
-				occupyCursor.add(Device.create(Device.CURSOR), Cursor.CURSOR_OCCUPY, e.getSourceAxe()).execute();
+				occupyCursor.add(Device.create(Device.CURSOR), Cursor.CURSOR_OCCUPY, e.getSourceAxis()).execute();
 				
 				if (mode == MODE_IN_GAME) {
 					pressShift.execute();
 				}
-				axeMoving(e);
+				axisMoving(e);
 				if (mode == MODE_IN_GAME) {
 					pressMouseLeft.execute();
 				}
 			}
 
 			@Override
-			public void axeStoped(JoyStickEvent e) {
+			public void axisStoped(JoyStickEvent e) {
 				Instructions freeCursor = new Instructions();
 				freeCursor.add(Device.create(Device.CURSOR), Cursor.CURSOR_FREE).execute();
 				releaseShift.execute();
@@ -129,12 +129,12 @@ public class Controller {
 		
 		JoyStickListener suspendMouseLeftHandler = new JoyStickAdapter() {
 			@Override
-			public void axeStarted(JoyStickEvent e) {
+			public void axisStarted(JoyStickEvent e) {
 				suspendMouseLeft.execute();
 			}
 
 			@Override
-			public void axeStoped(JoyStickEvent e) {
+			public void axisStoped(JoyStickEvent e) {
 				resumeMouseLeft.execute();
 			}
 			
@@ -167,6 +167,8 @@ public class Controller {
 		joyStick.getBtnMenu().bind(KeyEvent.VK_ESCAPE);
 		joyStick.getBtnX().bind(KeyEvent.VK_ENTER);
 		joyStick.getBtnY().bind(KeyEvent.VK_TAB);
+		joyStick.getBtnRight().bind(KeyEvent.VK_C);
+		joyStick.getBtnLeft().bind(KeyEvent.VK_Q);
 	}
 
 }

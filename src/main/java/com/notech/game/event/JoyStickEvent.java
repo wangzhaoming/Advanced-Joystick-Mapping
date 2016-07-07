@@ -4,18 +4,18 @@ public class JoyStickEvent {
 	public static final int BUTTON_PRESSED = 0;
 	public static final int BUTTON_RELEASED = 1;
 	public static final int BUTTON_CLICKED = 2;
-	public static final int AXE_STARTED = 3;
-	public static final int AXE_STOPPED = 4;
-	public static final int AXE_MOVING = 5;
+	public static final int AXIS_STARTED = 3;
+	public static final int AXIS_STOPPED = 4;
+	public static final int AXIS_MOVING = 5;
 	
-	public static final int LEFT_AXE_H = 0;
-	public static final int LEFT_AXE_V = 1;
-	public static final int RIGHT_AXE_H = 2;
-	public static final int RIGHT_AXE_V = 3;
+	public static final int LEFT_AXIS_H = 0;
+	public static final int LEFT_AXIS_V = 1;
+	public static final int RIGHT_AXIS_H = 2;
+	public static final int RIGHT_AXIS_V = 3;
 	public static final int LEFT_TRIGGER = 4; // -1 ~ 1
 	public static final int RIGHT_TRIGGER = 5; // -1 ~ 1
-	public static final int LEFT_AXE = 6;
-	public static final int RIGHT_AXE = 7;
+	public static final int LEFT_AXIS = 6;
+	public static final int RIGHT_AXIS = 7;
 	
 	public static final int BUTTON_A = 0;
 	public static final int BUTTON_B = 1;
@@ -34,9 +34,9 @@ public class JoyStickEvent {
 	
 	private int eventType = Integer.MIN_VALUE;
 	private int sourceButton = Integer.MIN_VALUE;
-	private int sourceAxe = Integer.MIN_VALUE;
-	private float axeValueX = Float.MIN_VALUE;
-	private float axeValueY = Float.MIN_VALUE;
+	private int sourceAxis = Integer.MIN_VALUE;
+	private float axisValueX = Float.MIN_VALUE;
+	private float axisValueY = Float.MIN_VALUE;
 	
 	// 按键
 	public JoyStickEvent(int eventType, int srcButton) {
@@ -45,11 +45,11 @@ public class JoyStickEvent {
 	}
 	
 	// 摇杆/扳机
-	public JoyStickEvent(int eventType, int srcAxe, float axeX, float axeY) {
+	public JoyStickEvent(int eventType, int srcAxis, float axisX, float axisY) {
 		this.eventType = eventType;
-		this.sourceAxe = srcAxe;
-		this.axeValueX = axeX;
-		this.axeValueY = axeY;
+		this.sourceAxis = srcAxis;
+		this.axisValueX = axisX;
+		this.axisValueY = axisY;
 	}
 	
 	public int getEventType() {
@@ -58,14 +58,14 @@ public class JoyStickEvent {
 	public int getSourceButton() {
 		return sourceButton;
 	}
-	public int getSourceAxe() {
-		return sourceAxe;
+	public int getSourceAxis() {
+		return sourceAxis;
 	}
-	public float getAxeValueX() {
-		return axeValueX;
+	public float getAxisValueX() {
+		return axisValueX;
 	}
-	public float getAxeValueY() {
-		return axeValueY;
+	public float getAxisValueY() {
+		return axisValueY;
 	}
 	public void setEventType(int eventType) {
 		this.eventType = eventType;
@@ -73,14 +73,14 @@ public class JoyStickEvent {
 	public void setSourceButton(int sourceButton) {
 		this.sourceButton = sourceButton;
 	}
-	public void setSourceAxe(int sourceAxe) {
-		this.sourceAxe = sourceAxe;
+	public void setSourceAxis(int sourceAxis) {
+		this.sourceAxis = sourceAxis;
 	}
-	public void setAxeValueX(float axeValueX) {
-		this.axeValueX = axeValueX;
+	public void setAxisValueX(float axisValueX) {
+		this.axisValueX = axisValueX;
 	}
-	public void setAxeValueY(float axeValueY) {
-		this.axeValueY = axeValueY;
+	public void setAxisValueY(float axisValueY) {
+		this.axisValueY = axisValueY;
 	}
 	
 }
