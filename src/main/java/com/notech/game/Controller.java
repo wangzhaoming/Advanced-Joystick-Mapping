@@ -5,6 +5,7 @@ import java.awt.Toolkit;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 
+import com.ivan.xinput.exceptions.XInputNotLoadedException;
 import com.notech.game.event.JoyStickAdapter;
 import com.notech.game.event.JoyStickEvent;
 import com.notech.game.event.JoyStickListener;
@@ -18,11 +19,11 @@ public class Controller {
 	private static final int SCREEN_WIDTH = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 	private static final int SCREEN_HEIGHT = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
 	private static final int OFFSET = 100;
-	private static final int CURSOR_SPEED = 5;
+	private static final int CURSOR_SPEED = 10;
 	private static final int CORRECTION_H = -40;
 	private static final int CORRECTION_H_ATTACK = -100;
 
-	public static void main(String[] args) throws InterruptedException, AWTException {
+	public static void main(String[] args) throws InterruptedException, AWTException, XInputNotLoadedException {
 		(new Controller()).run();
 	}
 
@@ -32,7 +33,7 @@ public class Controller {
 	private JoyStick joyStick;
 	private int mode = MODE_FREE_CURSOR;
 
-	private void run() throws AWTException, InterruptedException {
+	private void run() throws AWTException, InterruptedException, XInputNotLoadedException {
 		joyStick = new JoyStick();
 		Device.initialize();
 
@@ -49,8 +50,8 @@ public class Controller {
 			public void axisMoving(JoyStickEvent e) {
 				Instructions moveCursor = new Instructions();
 
-				int dx = (int) (e.getAxisValueX() * OFFSET);
-				int dy = (int) (-e.getAxisValueY() * OFFSET);
+				int dx = (int) (e.getX() * OFFSET);
+				int dy = (int) (-e.getY() * OFFSET);
 
 				moveCursor.add(Device.create(Device.CURSOR), Cursor.CURSOR_MOVE_RELATIVE_TO_POINT, e.getSourceAxis(), dx, dy,
 						SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + CORRECTION_H).execute();
@@ -73,15 +74,15 @@ public class Controller {
 				if (mode == MODE_FREE_CURSOR) {
 					Instructions moveCursor = new Instructions();
 
-					int dx = (int) (e.getAxisValueX() * CURSOR_SPEED);
-					int dy = (int) (-e.getAxisValueY() * CURSOR_SPEED);
+					int dx = (int) (e.getX() * CURSOR_SPEED);
+					int dy = (int) (-e.getY() * CURSOR_SPEED);
 
 					moveCursor.add(Device.create(Device.CURSOR), Cursor.CURSOR_MOVE, e.getSourceAxis(), dx, dy).execute();
 				} else {
 					Instructions moveCursor = new Instructions();
 
-					int dx = (int) (e.getAxisValueX() * OFFSET);
-					int dy = (int) (-e.getAxisValueY() * OFFSET);
+					int dx = (int) (e.getX() * OFFSET);
+					int dy = (int) (-e.getY() * OFFSET);
 
 					moveCursor.add(Device.create(Device.CURSOR), Cursor.CURSOR_MOVE_RELATIVE_TO_POINT, e.getSourceAxis(), dx, dy,
 							SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + CORRECTION_H_ATTACK).execute();
