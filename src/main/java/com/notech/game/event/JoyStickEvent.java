@@ -9,10 +9,10 @@ public class JoyStickEvent {
 	public static final int AXIS_STOPPED = 4;
 	public static final int AXIS_MOVING = 5;
 
-	public static final int LEFT_TRIGGER = 0;
-	public static final int RIGHT_TRIGGER = 1;
-	public static final int LEFT_AXIS = 2;
-	public static final int RIGHT_AXIS = 3;
+	public static final int LEFT_TRIGGER = 100;
+	public static final int RIGHT_TRIGGER = 101;
+	public static final int LEFT_AXIS = 102;
+	public static final int RIGHT_AXIS = 103;
 
 	public static final int BUTTON_A = 0;
 	public static final int BUTTON_B = 1;

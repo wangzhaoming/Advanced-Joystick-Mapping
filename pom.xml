@@ -29,5 +29,10 @@
 			<artifactId>jxinput</artifactId>
 			<version>f0ab68c13e7639da893f67414b834a4b398c4cf7</version>    <!-- JXInput 0.5 -->
 		</dependency>
+		<dependency>
+			<groupId>org.codehaus.groovy</groupId>
+			<artifactId>groovy</artifactId>
+			<version>2.4.7</version>
+		</dependency>
 	</dependencies>
 </project>
