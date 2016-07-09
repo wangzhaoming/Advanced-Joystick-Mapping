@@ -6,6 +6,5 @@ AJM uses a JoyStick to simulate your mouse and keyboard.
 
 AJM Requires Java 8 and supports windows 8 or later.
 
-Library:
-- LWJGL 3
-
+Library
+- JXInput: Java binding for XInput.

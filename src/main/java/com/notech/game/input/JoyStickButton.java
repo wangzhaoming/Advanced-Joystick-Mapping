@@ -19,8 +19,8 @@ public class JoyStickButton extends EventDispatcher {
 		this.buttonId = buttonId;
 	}
 	
-	public void update(int value) {
-		if (value == 1) {
+	public void update(boolean pressed) {
+		if (pressed) {
 			if (state == BUTTON_STATE_RELEASED) {
 				state = BUTTON_STATE_PRESSED;
 				processEvent(new JoyStickEvent(JoyStickEvent.BUTTON_PRESSED, buttonId));

@@ -21,11 +21,17 @@ public class JoyStickAxis extends EventDispatcher {
 		this.axisId = axisId;
 	}
 
-	public void update(float axisValueX, float axisValueY) {
-		axisValueX = transform(axisValueX);
-		axisValueY = transform(axisValueY);
+	/**
+	 * for axis
+	 * 
+	 * @param x
+	 * @param y
+	 */
+	public void update(float x, float y) {
+		x = transform(x);
+		y = transform(y);
 
-		if (axisValueX == 0 && axisValueY == 0) {
+		if (x == 0 && y == 0) {
 			if (state == AXIS_STATE_STARTED) {
 				state = AXIS_STATE_STOPPED;
 				processEvent(new JoyStickEvent(JoyStickEvent.AXIS_STOPPED, axisId, 0, 0));
@@ -33,9 +39,32 @@ public class JoyStickAxis extends EventDispatcher {
 		} else {
 			if (state == AXIS_STATE_STOPPED) {
 				state = AXIS_STATE_STARTED;
-				processEvent(new JoyStickEvent(JoyStickEvent.AXIS_STARTED, axisId, axisValueX, axisValueY));
+				processEvent(new JoyStickEvent(JoyStickEvent.AXIS_STARTED, axisId, x, y));
 			} else {
-				processEvent(new JoyStickEvent(JoyStickEvent.AXIS_MOVING, axisId, axisValueX, axisValueY));
+				processEvent(new JoyStickEvent(JoyStickEvent.AXIS_MOVING, axisId, x, y));
+			}
+		}
+	}
+	
+	/**
+	 * for trigger
+	 * 
+	 * @param x
+	 */
+	public void update(float x) {
+		x = transform(x);
+
+		if (x == 0) {
+			if (state == AXIS_STATE_STARTED) {
+				state = AXIS_STATE_STOPPED;
+				processEvent(new JoyStickEvent(JoyStickEvent.AXIS_STOPPED, axisId, 0));
+			}
+		} else {
+			if (state == AXIS_STATE_STOPPED) {
+				state = AXIS_STATE_STARTED;
+				processEvent(new JoyStickEvent(JoyStickEvent.AXIS_STARTED, axisId, x));
+			} else {
+				processEvent(new JoyStickEvent(JoyStickEvent.AXIS_MOVING, axisId, x));
 			}
 		}
 	}
