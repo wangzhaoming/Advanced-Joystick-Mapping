@@ -12,7 +12,7 @@ public class JoyStickAxis extends EventDispatcher {
 	private static final int AXIS_STATE_STARTED = 1;
 	private static final int AXIS_STATE_STOPPED = 0;
 
-	private static final float THRESHOLD = 0.1f;
+	private static final float THRESHOLD = 0.5f;
 
 	private int axisId;
 	private int state = AXIS_STATE_STOPPED;
