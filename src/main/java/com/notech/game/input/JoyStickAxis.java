@@ -12,7 +12,7 @@ public class JoyStickAxis extends EventDispatcher {
 	private static final int AXIS_STATE_STARTED = 1;
 	private static final int AXIS_STATE_STOPPED = 0;
 
-	private static final float THRESHOLD = 0.5f;
+	private static final float THRESHOLD = 0.2f;
 
 	private int axisId;
 	private int state = AXIS_STATE_STOPPED;
@@ -28,10 +28,7 @@ public class JoyStickAxis extends EventDispatcher {
 	 * @param y
 	 */
 	public void update(float x, float y) {
-		x = transform(x);
-		y = transform(y);
-
-		if (x == 0 && y == 0) {
+		if (isInactive(x) && isInactive(y)) {
 			if (state == AXIS_STATE_STARTED) {
 				state = AXIS_STATE_STOPPED;
 				processEvent(new JoyStickEvent(JoyStickEvent.AXIS_STOPPED, axisId, 0, 0));
@@ -52,9 +49,8 @@ public class JoyStickAxis extends EventDispatcher {
 	 * @param x
 	 */
 	public void update(float x) {
-		x = transform(x);
 
-		if (x == 0) {
+		if (isInactive(x)) {
 			if (state == AXIS_STATE_STARTED) {
 				state = AXIS_STATE_STOPPED;
 				processEvent(new JoyStickEvent(JoyStickEvent.AXIS_STOPPED, axisId, 0));
@@ -69,8 +65,8 @@ public class JoyStickAxis extends EventDispatcher {
 		}
 	}
 
-	private static float transform(float x) {
-		return Math.abs(x) > THRESHOLD ? x : 0;
+	private static boolean isInactive(float x) {
+		return Math.abs(x) < THRESHOLD;
 	}
 	
 	public void bind(int keycode) {
